@@ -1,5 +1,51 @@
-.logo {
-    width: 150px;
-    height: 150px;
-    padding: 20px;
+
+body {
+  margin: 0;
+  /*overflow: hidden;*/
+}
+
+section {
+  width: 100%;
+  margin: 0;
+  max-width: none;
+}
+
+.hero {
+  text-align: center;
+  width: 100%;
+  vertical-align: middle;
+  height: 90vh;
+  background-color: #212121;
+}
+
+.hero * {
+  margin-top: 30vh;
+}
+
+#logo {
+  width: 250px;
+  height: 250px;
+}
+
+.footer-hero {
+  background-color: #C50003;
+  height: 10vh;
+}
+
+.social-net {
+  background-color: #212121;
+  height: 90vh;
+}
+
+.img-holder{
+  display: table;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.logos{
+  width: 150px;
+  height: 150px;
 }

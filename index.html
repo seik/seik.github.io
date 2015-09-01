@@ -1,49 +1,20 @@
 <!doctype html>
-<html style="background-color: #212121; overflow: hidden">
-    <head>
-        <meta charset="UTF-8">
-        <title>Seik</title>
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    </head>
-    <body>
-        <header>
-            <div class="bar" style="height: 170px; position: relative">
-                <div class="seik" style="position: relative; margin: 20px;">
-                    <img class="seiklogo" style="width: 180px; height:180px; display: block; margin: auto; position: relative; "src="logos/seik.png" />
-                </div>
-            </div>
-        </header>
-        <div class="logocontainer" style="margin: auto; width: 460px; height: 460px; position: relative; top: 0; left: 0; bottom: 0; right: 0;">
-            <ul class="frow">
-                <li style="display: inline; list-style-type: none;"><a href="https://twitter.com/Seikv" class="twitterlink"><img class="logo" src="logos/twitter.png" style="width: 150px; height: 150px; padding: 20px;"></a></li>
-                <li style="display: inline; list-style-type: none;"><a href="https://github.com/Seik" class="githublink"><img class="logo" src="logos/github.png" style="width: 150px; height: 150px; padding: 20px;"></a></li>
-            </ul>
-            <ul class="srow">
-                <li style="display: inline; list-style-type: none;"><a href="http://coffeemr.tumblr.com/" class="tumblrlink"><img class="logo" src="logos/tumblr.png" style="width: 150px; height: 150px; padding: 20px;"></a></li>
-                <li style="display: inline; list-style-type: none;"><a href="mailto:ivmg19@gmail.com" class="maillink"><img class="logo" src="logos/gmail.png" style="width: 150px; height: 150px; padding: 20px;"></a></li>
-            </ul>
-        </div>
-    </body>
-    <script>
-	$(".twitterlink").hover(function(){
-  $(".bar").css("background-color","#00aced");
-  },function(){
-  $(".bar").css("background-color","none");
-  });
-    $(".githublink").hover(function(){
-  $(".bar").css("background-color","#424242");
-  },function(){
-  $(".bar").css("background-color","none");
-  });
-    $(".tumblrlink").hover(function(){
-  $(".bar").css("background-color","#32506d");
-  },function(){
-  $(".bar").css("background-color","none");
-  });
-    $(".maillink").hover(function(){
-  $(".bar").css("background-color","#F44336");
-  },function(){
-  $(".bar").css("background-color","none");
-  });
-	</script>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="main.css" />
+<title>Seik</title>
+</head>
+<body>
+  <section class="hero">
+    <img id="logo" src="logo.png">
+  </section>
+  <section class="footer-hero">
+  </section>
+  <section class="social-net">
+    <div class="img-holder">
+      <img class="logos" src="twitter.png"><img class="logos" src="github.png"><img class="logos" src="tumblr.png">
+    </div>
+  </section>
+</body>
 </html>
