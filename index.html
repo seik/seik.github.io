@@ -3,18 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="main.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <title>Seik</title>
 </head>
 <body>
   <section class="hero">
-    <img id="logo" src="logo.png">
+    <img href="" id="logo" src="logo.png">
   </section>
   <section class="footer-hero">
+  <a id="click" style="cursor: pointer;"><img src="arrow.png"></a>
   </section>
-  <section class="social-net">
+  <section class="social-net" id="target">
     <div class="img-holder">
       <a href="https://twitter.com/seikv"><img class="logos" src="twitter.png"></a><a href="https://github.com/Seik"><img class="logos" src="github.png"></a><a href="http://coffeemr.tumblr.com/"><img class="logos" src="tumblr.png"></a>
     </div>
   </section>
+  <script>
+$("#click").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#target").offset().top
+    }, 600);
+});
+  </script>
 </body>
 </html>
