@@ -31,6 +31,13 @@ section {
   height: 250px;
 }
 
+#textHero{
+  margin-top: 0;
+  color: #C50003;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 180%;
+}
+
 .footer-hero {
   background-color: #C50003;
   height: 10vh;
@@ -52,6 +59,7 @@ section {
 .logos{
   width: 150px;
   height: 150px;
+  display: inline;
 }
 
 .footer-hero img {
