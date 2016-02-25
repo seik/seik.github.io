@@ -1,33 +1,25 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="main.css" />
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:600' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<title>Seik</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="main.css" />
+	<link href='https://fonts.googleapis.com/css?family=Quicksand:700' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="animation.js"></script>
+	<title>Seik</title>
 </head>
 <body>
-  <section class="hero">
-    <img id="logo" src="logo.png">
-    <h1 id="textHero">"Memento qui sis"</h1>
-  </section>
-  <section class="footer-hero">
-  <a id="click" style="cursor: pointer;"><img src="arrow.png"></a>
-  </section>
-  <section class="social-net" id="target">
-    <div class="img-holder">
-      <a href="https://twitter.com/seikv"><img class="logos" src="twitter.png"></a>
-      <a href="https://github.com/Seik"><img class="logos" src="github.png"></a>
-      <a href="http://coffeemr.tumblr.com/"><img class="logos" src="tumblr.png"></a>
-    </div>
-  </section>
-  <script>
-$("#click").click(function() {
-    $('html, body').animate({
-        scrollTop: $("#target").offset().top
-    }, 600);
-});
-  </script>
+	<div class="bg" id="twitterbg" hidden="true"></div>
+	<div class="bg" id="githubbg" hidden="true"></div>
+	<div class="bg" id="telegrambg" hidden="true"></div>
+	<div id="center">
+		<div id="text">
+			<a href="https://twitter.com/seikv" class="text" id="twitter">twitter</a>
+			<a href="https://github.com/seik" class="text" id="github">github</a>
+			<a href="http://telegram.me/seikv" class="text" id="telegram">telegram</a>
+		</div>
+	</div>
 </body>
 </html>

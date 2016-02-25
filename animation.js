@@ -1,0 +1,20 @@
+$( document ).ready(function() {
+	$("#twitter").stop().mouseenter(function(){
+		$("#twitterbg").show("2000")
+	});
+	$("#twitter").stop().mouseleave(function(){
+		$("#twitterbg").hide("2000")
+	});
+	$("#github").stop().mouseenter(function(){
+		$("#githubbg").show("2000")
+	});
+	$("#github").stop().mouseleave(function(){
+		$("#githubbg").hide("2000")
+	});
+	$("#telegram").stop().mouseenter(function(){
+		$("#telegrambg").show("2000")
+	});
+	$("#telegram").stop().mouseleave(function(){
+		$("#telegrambg").hide("2000")
+	});
+});
