@@ -1,20 +1,29 @@
 $( document ).ready(function() {
 	$("#twitter").stop().mouseenter(function(){
-		$("#twitterbg").show("2000")
+		$("#twitterbg").stop().show("2000")
 	});
+	$("#twitter").click(function() { 
+		document.location = "https://twitter.com/seikv";
+	} );
 	$("#twitter").stop().mouseleave(function(){
-		$("#twitterbg").hide("2000")
+		$("#twitterbg").stop().hide("2000")
 	});
 	$("#github").stop().mouseenter(function(){
-		$("#githubbg").show("2000")
+		$("#githubbg").stop().show("2000")
 	});
+	$("#github").click(function() { 
+		document.location = "https://github.com/seik";
+	} );
 	$("#github").stop().mouseleave(function(){
-		$("#githubbg").hide("2000")
+		$("#githubbg").stop().hide("2000")
 	});
 	$("#telegram").stop().mouseenter(function(){
-		$("#telegrambg").show("2000")
+		$("#telegrambg").stop().show("2000")
 	});
+	$("#telegram").click(function() { 
+		document.location = "http://telegram.me/seikv";
+	} );
 	$("#telegram").stop().mouseleave(function(){
-		$("#telegrambg").hide("2000")
+		$("#telegrambg").stop().hide("2000")
 	});
 });
