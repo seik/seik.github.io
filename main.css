@@ -3,12 +3,12 @@ html {
   background-color: #ffffff;
 }
 
-body{
+body {
   margin: 0;
   padding: 0;
 }
 
-.bg{
+.bg {
   position: absolute;
   width:50%;
   height:50%;
@@ -17,9 +17,9 @@ body{
   transform: translate(-50%, -50%);
 }
 
-#twitterbg{
+#twitterbg {
   opacity: 1.0;
-  background-image: url("http://vectorlogofree.com/wp-content/uploads/2012/12/new-twitter-logo-vector-400x400.png");
+  background-image: url("static/logo-twitter.png");
   background-repeat: 'no-repeat';
   background-position: 'center';
   background-size: cover;
@@ -27,9 +27,9 @@ body{
   height: 300px
 }
 
-#githubbg{
+#githubbg {
   opacity: 1.0;
-  background-image: url("http://bradypodion.io/images/giants/67c5a89f.github.png");
+  background-image: url("static/logo-github.png");
   background-repeat: 'no-repeat';
   background-position: 'center';
   background-size: cover;
@@ -37,9 +37,9 @@ body{
   height: 300px
 }
 
-#telegrambg{
+#telegrambg {
   opacity: 1.0;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/500px-Telegram_logo.svg.png");
+  background-image: url("static/logo-telegram.png");
   background-repeat: 'no-repeat';
   background-position: 'center';
   background-size: cover;
@@ -47,14 +47,24 @@ body{
   height: 300px
 }
 
-#center{
+#emailbg {
+  opacity: 1.0;
+  background-image: url("static/logo-email.png");
+  background-repeat: 'no-repeat';
+  background-position: 'center';
+  background-size: cover;
+  width: 300px;
+  height: 300px
+}
+
+#center {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.text{
+.text {
   padding: 20px;
   font-size: 30px;
   color: black;
