@@ -3,8 +3,8 @@
 ## Download and Installation
 
 To begin using this template, choose one of the following options to get started:
-* Clone the repo: `git clone https://github.com/seik/seik.github.me.git`
-* [Fork, Clone, or Download on GitHub](https://github.com/seik/seik.github.me)
+* Clone the repo: `git clone https://github.com/seik/seik.github.io.git`
+* [Fork, Clone, or Download on GitHub](https://github.com/seik/seik.github.io)
 
 ## Usage
 
