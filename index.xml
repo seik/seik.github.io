@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Iván Martín</title>
+    <link>http://blog.ivmg.me/</link>
+    <description>Recent content on Iván Martín</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-ES</language>
+    <lastBuildDate>Sun, 09 Dec 2018 12:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://blog.ivmg.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>¡Hola!</title>
+      <link>http://blog.ivmg.me/posts/hi/</link>
+      <pubDate>Sun, 09 Dec 2018 12:00:00 +0100</pubDate>
+      
+      <guid>http://blog.ivmg.me/posts/hi/</guid>
+      <description>Pues eso, 👋🏼.
+Llevo tiempo queriendo tener un blog para compartir las cosas que aprendo, ya que a veces twitter se me queda un poco corto.
+Por lo general el tema de los posts será tecnológico, aunque seguro que hay excepciones. En cuanto a frecuencia no hay nada escrito, pero estaría bien no estar más de 3 meses sin escribir nada.
+Y con eso, ya está todo dicho, tengo pensado un tema bastante chulo para el primer post &amp;ldquo;real&amp;rdquo;.</description>
+    </item>
+    
+  </channel>
+</rss>
