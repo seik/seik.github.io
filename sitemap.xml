@@ -3,29 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://ivmg.me/posts/hi/</loc>
+    <loc>https://ivmg.me/posts/hi/</loc>
     <lastmod>2018-12-09T12:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://ivmg.me/categories/</loc>
+    <loc>https://ivmg.me/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://ivmg.me/</loc>
-    <lastmod>2018-12-09T12:00:00+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ivmg.me/posts/</loc>
+    <loc>https://ivmg.me/</loc>
     <lastmod>2018-12-09T12:00:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://ivmg.me/tags/</loc>
+    <loc>https://ivmg.me/posts/</loc>
+    <lastmod>2018-12-09T12:00:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ivmg.me/tags/</loc>
     <priority>0</priority>
   </url>
   

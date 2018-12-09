@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Iván Martín</title>
-    <link>http://ivmg.me/</link>
+    <link>https://ivmg.me/</link>
     <description>Recent content on Iván Martín</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
     <lastBuildDate>Sun, 09 Dec 2018 12:00:00 +0100</lastBuildDate>
     
-	<atom:link href="http://ivmg.me/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ivmg.me/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>¡Hola!</title>
-      <link>http://ivmg.me/posts/hi/</link>
+      <link>https://ivmg.me/posts/hi/</link>
       <pubDate>Sun, 09 Dec 2018 12:00:00 +0100</pubDate>
       
-      <guid>http://ivmg.me/posts/hi/</guid>
+      <guid>https://ivmg.me/posts/hi/</guid>
       <description>Pues eso, 👋🏼.
 Llevo tiempo queriendo tener un blog para compartir las cosas que aprendo, ya que a veces twitter se me queda un poco corto.
 Por lo general el tema de los posts será tecnológico, aunque seguro que hay excepciones. En cuanto a frecuencia no hay nada escrito, pero estaría bien no estar más de 3 meses sin escribir nada.
