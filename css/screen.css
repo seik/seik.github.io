@@ -107,42 +107,49 @@ table { border-collapse: collapse; border-spacing: 0; }
 /* Import the font files */
 @font-face {
   font-family: 'Open Sans';
+  font-display: auto;
   src: local('Open Sans'), local('OpenSans'), url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
   font-weight: normal; font-style: normal;
 }
 
 @font-face {
   font-family: 'Open Sans';
+  font-display: auto;
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url('../fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
   font-weight: bold; font-style: normal;
 }
 
 @font-face {
   font-family: 'Merriweather';
+  font-display: auto;
   src: local('Merriweather Light'), local('Merriweather-Light'), url('../fonts/Merriweather/Merriweather-Light.ttf') format('truetype');
   font-weight: light; font-style: normal;
 }
 
 @font-face {
   font-family: 'Merriweather';
+  font-display: auto;
   src: local('Merriweather Light Italic'), local('Merriweather-LightItalic'), url('../fonts/Merriweather/Merriweather-LightItalic.ttf') format('truetype');
   font-weight: light; font-style: italic;
 }
 
 @font-face {
   font-family: 'Merriweather';
+  font-display: auto;
   src: local('Merriweather Bold'), local('Merriweather-Bold'), url('../fonts/Merriweather/Merriweather-Bold.ttf') format('truetype');
   font-weight: bold; font-style: normal;
 }
 
 @font-face {
   font-family: 'Merriweather';
+  font-display: auto;
   src: local('Merriweather Bold Italic'), local('Merriweather-BoldItalic'), url('../fonts/Merriweather/Merriweather-BoldItalic.ttf') format('truetype');
   font-weight: bold; font-style: italic;
 }
 
 @font-face {
   font-family: 'Inconsolata';
+  font-display: auto;
   src: local('Inconsolata Regular'), local('Inconsolata-Regular'), url('../fonts/Inconsolata/Inconsolata-Regular.ttf') format('truetype');
   font-weight: normal; font-style: normal;
 }
@@ -150,6 +157,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 /* Import the font file with the icons in it */
 @font-face {
   font-family: 'genericons';
+  font-display: auto;
   src: url('../fonts/Genericons/Genericons.eot');
   src: url('../fonts/Genericons/Genericons.eot?#iefix') format('embedded-opentype'),
        url('../fonts/Genericons/Genericons.woff') format('woff'),
