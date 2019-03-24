@@ -6,22 +6,10 @@
     <description>Recent content in Posts on Iván Martín</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Thu, 13 Dec 2018 21:05:45 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 09 Dec 2018 12:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://ivmg.me/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>UPV, Python y muchas fotos</title>
-      <link>https://ivmg.me/posts/upv-facemash/</link>
-      <pubDate>Thu, 13 Dec 2018 21:05:45 +0100</pubDate>
-      
-      <guid>https://ivmg.me/posts/upv-facemash/</guid>
-      <description>Contexto Hace ~3 años, cuando estaba en primero, recuerdo recibir por el grupo de clase un enlace a una página hosteada en github. El contenido era un juego al estilo Facemash. Podeis acceder a lo que era el juego aquí, aunque ya no funciona.
-Era provocativo y por eso la gente entraba.
-¿Cómo fundionaba? Bien, vamos a ir entrando en materia 🤓.
-Realmente no es para nada complejo, la UPV sirve las imágenes de los alumnos en una URL y cada alumno tiene un identificador, por lo que, una url válida sería</description>
-    </item>
     
     <item>
       <title>¡Hola!</title>
