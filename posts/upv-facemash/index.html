@@ -97,7 +97,7 @@
     },
     "headline": UPV, Python y muchas fotos,
     "name": UPV, Python y muchas fotos,
-    "wordCount": 1037,
+    "wordCount": 1032,
     "timeRequired": "PT5M",
     "inLanguage": {
       "@type": "Language",
@@ -238,27 +238,56 @@ curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intra
 
 <p>Hora de montarse un dataset.</p>
 
-<p>La idea es montar un script en python, pero un script rápido, muy rápido. Para ello vamos a usar <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a>, <a href="https://aiohttp.readthedocs.io/en/stable/">aiohttp</a> para la comunicación, <a href="https://github.com/Tinche/aiofiles">aiofiles</a> para guardar las fotos y <a href="https://github.com/cgarciae/pypeln">pypeln</a> que nos ayudará con cómo aiohttp hace las llamadas. <em>Show me the code</em>: ```python
-import asyncio
-import hashlib import sys
-import aiofiles from aiohttp import ClientSession, TCPConnector
-from pypeln import asyncio_task as aio urls = (f&rdquo;<a href="https://intranet.upv.es/foto/getb/{i}.gif&quot;">https://intranet.upv.es/foto/getb/{i}.gif&quot;</a> for i in range(int(sys.argv[1]))) headers = {&ldquo;Referer&rdquo;: &ldquo;<a href="https://intranet.upv.es/pls/soalu/sic_al.lis&quot;">https://intranet.upv.es/pls/soalu/sic_al.lis&quot;</a>}
+<p>La idea es montar un script en python, pero un script rápido, muy rápido. Para ello vamos a usar <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a>, <a href="https://aiohttp.readthedocs.io/en/stable/">aiohttp</a> para la comunicación, <a href="https://github.com/Tinche/aiofiles">aiofiles</a> para guardar las fotos y <a href="https://github.com/cgarciae/pypeln">pypeln</a> que nos ayudará con cómo aiohttp hace las llamadas.</p>
+
+<p><em>Show me the code</em>:</p>
+
+<pre><code class="language-python">import asyncio
+import hashlib
+import sys
+
+import aiofiles
+from aiohttp import ClientSession, TCPConnector
+from pypeln import asyncio_task as aio
+
+urls = (f&quot;https://intranet.upv.es/foto/getb/{i}.gif&quot; for i in range(int(sys.argv[1])))
+headers = {&quot;Referer&quot;: &quot;https://intranet.upv.es/pls/soalu/sic_al.lis&quot;}
 hash_not_available = (
- &ldquo;12fc76fc961784a7568e6bbfe53559ec00e8819fdb807d44&rdquo; &ldquo;2735c465e938c5ee8ac060f7abe70c9fbe8b52d461379430&rdquo;   &ldquo;637676399a793900d8221419fa5b50a5&rdquo;
-)</p>
+    &quot;12fc76fc961784a7568e6bbfe53559ec00e8819fdb807d44&quot;
+    &quot;2735c465e938c5ee8ac060f7abe70c9fbe8b52d461379430&quot;
+    &quot;637676399a793900d8221419fa5b50a5&quot;
+)
 
-<p>async def download(url, session): try:   async with session.get(url, headers=headers) as response:
-response_file = await response.read()    if hashlib.blake2b(response_file).hexdigest() != hash_not_available:         file_name = url.split(&ldquo;/&rdquo;)[5]         f = await aiofiles.open(f&rdquo;photos/{file_name}&ldquo;, mode=&ldquo;wb&rdquo;)
-   await f.write(await response.read())
-   await f.close()
- except: pass
+
+async def download(url, session):
+    try:
+        async with session.get(url, headers=headers) as response:
+            response_file = await response.read()
+
+            if hashlib.blake2b(response_file).hexdigest() != hash_not_available:
+                file_name = url.split(&quot;/&quot;)[5]
+
+                f = await aiofiles.open(f&quot;photos/{file_name}&quot;, mode=&quot;wb&quot;)
+
+                await f.write(await response.read())
+                await f.close()
+    except:
+        pass
+
+
 aio.each(
- download,  urls,
- workers=1_000,  on_start=lambda: ClientSession(connector=TCPConnector(limit=None)), on_done=lambda _status, session: session.close(),   run=True,
-)</p>
+    download,
+    urls,
+    workers=1_000,
+    on_start=lambda: ClientSession(connector=TCPConnector(limit=None)),
+    on_done=lambda _status, session: session.close(),
+    run=True,
+)
+</code></pre>
 
-<pre><code>
-Vamos a ver en más detalle algunas partes. ```python urls = ( f&quot;https://intranet.upv.es/foto/getb/{i}.gif&quot; for i in range(int(sys.argv[1]))
+<p>Vamos a ver en más detalle algunas partes.</p>
+
+<pre><code class="language-python">urls = ( f&quot;https://intranet.upv.es/foto/getb/{i}.gif&quot; for i in range(int(sys.argv[1]))
 )
 </code></pre>
 
@@ -267,20 +296,25 @@ Vamos a ver en más detalle algunas partes. ```python urls = ( f&quot;https://in
 <pre><code class="language-python">headers = {&quot;Referer&quot;: &quot;https://intranet.upv.es/pls/soalu/sic_al.lis&quot;}
 </code></pre>
 
-<p>Aquí estamos definiendo la cabecera <em>mágica</em> que nos va a permitir acceder al recurso. ```python hash_not_available = &ldquo;12fc76fc961784a7568e6&hellip;&rdquo;</p>
+<p>Aquí estamos definiendo la cabecera <em>mágica</em> que nos va a permitir acceder al recurso.</p>
 
-<pre><code>
-Bien, si queremos iterar sobre todos los identificadores que existen, nos vamos a encontrar muchas veces con la imagen de recurso no disponible, por lo que tenemos que encontrar alguna forma de filtrarla. Una forma rápida de hacerlo es comparando los hashes de los archivos, la función en concreto que vamos a usar es [BLAKE2b](https://blake2.net/). Calculamos el hash para dicha foto y lo dejamos guardado en una variable para su posterior uso.
+<pre><code class="language-python">hash_not_available = &quot;12fc76fc961784a7568e6...&quot;
+</code></pre>
 
-La parte más interesante de la función de descarga es cuando comparamos que la imagen sea distinta a la de no disponible cuanto a la función de descarga es bastante simple, lo único interesante es cuando comparamos que la foto sea distinta a la de no disponible:
+<p>Bien, si queremos iterar sobre todos los identificadores que existen, nos vamos a encontrar muchas veces con la imagen de recurso no disponible, por lo que tenemos que encontrar alguna forma de filtrarla. Una forma rápida de hacerlo es comparando los hashes de los archivos, la función en concreto que vamos a usar es <a href="https://blake2.net/">BLAKE2b</a>. Calculamos el hash para dicha foto y lo dejamos guardado en una variable para su posterior uso.</p>
 
-```python
-if hashlib.blake2b(response_file).hexdigest() != hash_not_available:
+<p>La parte más interesante de la función de descarga es cuando comparamos que la imagen sea distinta a la de no disponible cuanto a la función de descarga es bastante simple, lo único interesante es cuando comparamos que la foto sea distinta a la de no disponible:</p>
+
+<pre><code class="language-python">if hashlib.blake2b(response_file).hexdigest() != hash_not_available:
  ...
 </code></pre>
 
-<p>Además de coger el identificador de la url que estemos buscando en ese momento: <code>python
-file_name = url.split(&quot;/&quot;)[5]</code> Por último, usamos pypeln para organizar el cómo se van a hacer las llamadas:</p>
+<p>Además de coger el identificador de la url que estemos buscando en ese momento:</p>
+
+<pre><code class="language-python">file_name = url.split(&quot;/&quot;)[5] 
+</code></pre>
+
+<p>Por último, usamos pypeln para organizar el cómo se van a hacer las llamadas:</p>
 
 <pre><code class="language-python">aio.each(
   download,
@@ -290,8 +324,9 @@ file_name = url.split(&quot;/&quot;)[5]</code> Por último, usamos pypeln para o
 )
 </code></pre>
 
-<p>Es interesante el parámetro <code>workers</code>, para especificar que de forma concurrente solamente queremos estar scrapeando 1000 direcciones (que no son pocas). Cuando una de las tareas abiertas se completen se irán lanzando nuevas hasta llegar a este límite.
-Aquí podeis ver cómo scrapea 2.000 IDs:</p>
+<p>Es interesante el parámetro <code>workers</code>, para especificar que de forma concurrente solamente queremos estar scrapeando 1000 direcciones (que no son pocas). Cuando una de las tareas abiertas se completen se irán lanzando nuevas hasta llegar a este límite.</p>
+
+<p>Aquí podeis ver cómo scrapea 2.000 IDs:</p>
 
 <p><a href="https://asciinema.org/a/izDRrLLGqx3yIRMZU25x55BK3"><img src="https://asciinema.org/a/izDRrLLGqx3yIRMZU25x55BK3.svg" alt="asciicast" /></a></p>
 
