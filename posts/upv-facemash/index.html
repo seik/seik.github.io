@@ -31,7 +31,7 @@
     
     <meta property="og:description" content="" />
     <meta property="og:type" content="article" />
-    <meta property="article:published_time" content="2018-12-13T21:05:45&#43;01:00" />
+    <meta property="article:published_time" content="2019-03-28T10:24:47&#43;01:00" />
 
     
     
@@ -97,15 +97,15 @@
     },
     "headline": UPV, Python y muchas fotos,
     "name": UPV, Python y muchas fotos,
-    "wordCount": 703,
-    "timeRequired": "PT4M",
+    "wordCount": 1036,
+    "timeRequired": "PT5M",
     "inLanguage": {
       "@type": "Language",
       "alternateName": en
     },
     "url": https://ivmg.me/posts/upv-facemash/,
-    "datePublished": 2018-12-13T21:05Z,
-    "dateModified": 2018-12-13T21:05Z,
+    "datePublished": 2019-03-28T10:24Z,
+    "dateModified": 2019-03-28T10:24Z,
     
     
     "description": ,
@@ -190,54 +190,47 @@
 
 <p><strong>Toda</strong> la clase se puso a jugar.</p>
 
-<p>Al cabo de unos días la gente encargada de los sistemas hicieron cambios para que las fotos dejasen de ser accesibles sin autenticación. Cuando intentabas acceder a la fotografía de un usuario te devolvian esta imagen:</p>
+<p>Al cabo de unos días la gente encargada de los sistemas hicieron cambios para que las fotos dejasen de ser accesibles sin autenticación. Cuando intentabas acceder a la fotografía de un usuario te devolvían esta imagen:</p>
 
 <p><img src="https://ivmg.me/images/upv-facemash/no-available.gif" alt="Link" /></p>
 
 <h4 id="demos-paso-a-la-chapuza">Demos paso a: La chapuza 🛠</h4>
 
-<p>Un año o dos después de que hiciesen los cambios, me dio por mirar bien lo que habian hecho para bloquear el acceso. Antes de indagar suponía que habrían requerido autenticación con el token de sesión y dado que ese token caduca, si a alguien le diese por usarlo para obtener todas las fotos sería tedioso. Además de que podrian ver quién es.</p>
+<p>Un año o dos después de que hiciesen los cambios, me dio por mirar bien lo quehabíann hecho para bloquear el acceso. Antes de indagar suponía que habrían requerido autenticación con el token de sesión y dado que ese token caduca, si a alguien le diese por usarlo para obtener todas las fotos sería tedioso. Además de que podrían ver quién es.</p>
 
 <p>Primero necesitamos saber cómo se sirven las fotos.</p>
 
 <p><img src="https://ivmg.me/images/upv-facemash/blurred-photos-link.png" alt="Link" /></p>
 
-<p>Vemos dos rutas que nos podrian valer: <code>/foto/orla/{id}.gif</code> y <code>/foto/getb/{id}.gif</code>. Además de ver cual es mi identificador: <code>55244399</code>.</p>
+<p>Vemos dos rutas que nospodríann valer: <code>/foto/orla/{id}.gif</code> y <code>/foto/getb/{id}.gif</code>. Además de ver cual es mi identificador: <code>55244399</code>.</p>
 
-<p>Cada <em>asociado</em> tiene un identificador &ldquo;aleatorio&rdquo; (ya hablaremos de esto luego 😂), digo <em>asociado</em> porque el sistema almacena a alumnos, empleados del campus y profesores. En el caso de que pasemos un identificador que no esté asociado a un alumno se nos devolverá la imagen de no disponible.</p>
+<p>Cada <em>asociado</em> tiene un identificador &ldquo;aleatorio&rdquo;, digo <em>asociado</em> porque el sistema almacena a alumnos, empleados del campus y profesores. En el caso de que pasemos un identificador que no esté asociado a un alumno se nos devolverá la imagen de no disponible.</p>
 
 <p>Bien, ahora que ya sabemos cómo obtener fotos vamos a ver cómo las han protegido.</p>
 
-<p>Como he comentado antes, al protegerlas asumí que lo habrían hecho con el token de sesión, pero si el enlace directamente en otra pestaña del navegador, te devuelven que el recurso no está disponible. En cambio, si pulsas en algunas de las fotos de la pantalla de la orla mostrada anteriormente si que funciona.</p>
+<p>Como he comentado antes, al protegerlas asumí que lo habrían hecho con el token de sesión ya que al acceder haciendo clic en la foto se abre una nueva pestaña cargando la imagen. Lo raro viene, cuando al copiar el enlace que hemos visto anteriormente en una nueva pestaña y se te muestra que el recurso no está disponible.</p>
 
 <p><img src="https://ivmg.me/images/upv-facemash/wait-what.gif" alt="Wait what" /></p>
 
-<p>Desde el inspector, podemos copiar la petición exacta que ha hecho el navegador para obtener una imagen. Que en formato de petición cURL sería tal que:</p>
+<p>Esto no tiene ningún sentido ya que si la autenticación se hiciese por algo que se guarda en el navegador daría igual queaccediésemoss a la foto copiando el enlace o clicando directamente.</p>
 
-<pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif'
--H 'Pragma: no-cache'
--H 'Accept-Encoding: gzip, deflate, br'
--H 'Accept-Language: es-ES,es;q=0.9,en;q=0.8'
--H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36'
--H 'Accept: image/webp,image/apng,image/*,*/*;q=0.8'
--H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla'
--H 'Cookie: T=foto1; AMFParams=dummy,false,false,false,false,true,mac,10_14_2,chrome,73.0.3683.75; AMFDetect=true; TDp={token}; iacclarge=; UPV_DEBUG=,iacclarge; accesible=HighContrast'
--H 'Connection: keep-alive'
--H 'Cache-Control: no-cache'
---compressed
+<p>Vamos a ver cómo se está haciendo la llamada exactamente. Desde el inspector, podemos copiar la petición exacta que ha hecho el navegador para obtener una imagen. Que en este caso, en formato cURL sería tal que:</p>
+
+<pre><code class="language-bash">-H 'Cookie: T=foto1; AMFParams=dummy,false,false,false,false,true,mac,10_14_2,chrome,73.0.3683.75; AMFDetect=true; TDp={token}; iacclarge=; UPV_DEBUG=,iacclarge; accesible=HighContrast' -H 'Connection: keep-alive'
+-H 'Cache-Control: no-cache' --compressed ``` Si quitamos las cosas que no nos interesan y le añadimos `--output foto.gif` para que nos descargue el archivo, nos quedariamos con:
+
+```bash
+curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla' -H 'Cookie: TDp={token};' --output foto.gif
 </code></pre>
 
-<p>Si quitamos las cosas que no nos interesan y le añadimos <code>--output foto.gif</code> para que nos descargue el archivo, nos quedariamos con:</p>
-
-<pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla' -H 'Cookie: TDp={token};' --output foto.gif
-</code></pre>
-
-<p>Llegados a este punto, tenemos dos headers: <code>TDp</code> (el token?) y <code>Referrer</code>. Y antes ya hemos visto no tendría sentido que fuese el token el que nos permita acceder a la foto, así que la petición mínima con la que nos podemos quedar es:</p>
+<p>Llegados a este punto, tenemos dos headers: <code>TDp</code> (el token?) y <code>Referrer</code>. Si sólo dejamos el parámetro <code>Referrer</code>, la fotografía se descarga, en cambio, quitándolo se nos devuelve la imagen de recurso no disponible. Por lo que la petición mínima con la que nos quedamos es:</p>
 
 <pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis' --output foto.gif
 </code></pre>
 
-<p>No es una completa chapuza, ya que ahora no puedes insertar la foto en una web y que cargue. Además de que tampoco puedes cargarla de forma dinamica porque (gracias a Dios) tienen el CORS configurado. Pero si lo que querian era proteger las fotos, sin duda se podría haber hecho mejor.</p>
+<p>¿Qué ha pasado? Pues que, el arreglo que han hecho es añadir una cabecera para saber el origen desde el que se está accediendo al recurso.</p>
+
+<p>Ni esto es el hackeo del siglo, ni ellos han hecho la mayor chapuza de la historia. Ahora ya no se puede insertar la foto en una web de forma directa y tampoco de forma dinámica porque (gracias a Dios) tienen el CORS configurado. Pero si lo que querían era proteger las fotos, sin duda se podría haber hecho mejor.</p>
 
 <p>Ah, creo que los alumnos tienen la posibilidad de configurar una web en un subdominio de <code>*.upv.es</code>, así que 👋🏼 CORS.</p>
 
@@ -245,52 +238,62 @@
 
 <p>Hora de montarse un dataset.</p>
 
-<p>Lo primero que tenemos que tener en cuenta es que si queremos iterar sobre todos los identificadores que existen, nos vamos a enconrar muchas veces con la imagen de que el recurso no está disponible. Por lo que tenemos que encontrar alguna forma de filtrarla. Para esto podemos obtener el MD5 del archivo y listo, en este caso es: <code>eca51b6f7b2b067a1129a44557583a88</code>.</p>
+<p>La idea es montar un script en python, pero un script rápido, muy rápido. Para ello vamos a usar <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a>, <a href="https://aiohttp.readthedocs.io/en/stable/">aiohttp</a> para la comunicación, <a href="https://github.com/Tinche/aiofiles">aiofiles</a> para guardar las fotos y <a href="https://github.com/cgarciae/pypeln">pypeln</a> que nos ayudará con cómo aiohttp hace las llamadas. <em>Show me the code</em>: ```python
+import asyncio
+import hashlib import sys
+import aiofiles from aiohttp import ClientSession, TCPConnector
+from pypeln import asyncio_task as aio urls = (f&rdquo;<a href="https://intranet.upv.es/foto/getb/{i}.gif&quot;">https://intranet.upv.es/foto/getb/{i}.gif&quot;</a> for i in range(int(sys.argv[1]))) headers = {&ldquo;Referer&rdquo;: &ldquo;<a href="https://intranet.upv.es/pls/soalu/sic_al.lis&quot;">https://intranet.upv.es/pls/soalu/sic_al.lis&quot;</a>}
+hash_not_available = (
+ &ldquo;12fc76fc961784a7568e6bbfe53559ec00e8819fdb807d44&rdquo; &ldquo;2735c465e938c5ee8ac060f7abe70c9fbe8b52d461379430&rdquo;   &ldquo;637676399a793900d8221419fa5b50a5&rdquo;
+)</p>
 
-<p>Este fue el script que monté en su momento para descargar las fotos:</p>
-
-<pre><code class="language-python">import asyncio
-import sys
-from hashlib import md5
-
-import aiofiles
-from aiohttp import ClientSession, TCPConnector
-from pypeln import asyncio_task as aio
-
-limit = 1000
-urls = (
-    &quot;https://intranet.upv.es/foto/getb/{}.gif&quot;.format(i)
-    for i in range(int(sys.argv[1]))
-)
-headers = {&quot;Referer&quot;: &quot;https://intranet.upv.es/pls/soalu/sic_al.lis&quot;}
-
-
-async def download(url, session):
-    try:
-        async with session.get(url, headers=headers) as response:
-            response_file = await response.read()
-
-            m = md5()
-            m.update(response_file)
-
-            if m.hexdigest() != &quot;eca51b6f7b2b067a1129a44557583a88&quot;:
-                file_name = url.split(&quot;/&quot;)[5]
-                f = await aiofiles.open(f&quot;photos/{file_name}&quot;, mode=&quot;wb&quot;)
-                await f.write(await response.read())
-                await f.close()
-    except:
-        pass
-
-
+<p>async def download(url, session): try:   async with session.get(url, headers=headers) as response:
+response_file = await response.read()    if hashlib.blake2b(response_file).hexdigest() != hash_not_available:         file_name = url.split(&ldquo;/&rdquo;)[5]         f = await aiofiles.open(f&rdquo;photos/{file_name}&ldquo;, mode=&ldquo;wb&rdquo;)
+   await f.write(await response.read())
+   await f.close()
+ except: pass
 aio.each(
-    download,
-    urls,
-    workers=limit,
-    on_start=lambda: ClientSession(connector=TCPConnector(limit=None)),
-    on_done=lambda _status, session: session.close(),
-    run=True,
+ download,  urls,
+ workers=1_000,  on_start=lambda: ClientSession(connector=TCPConnector(limit=None)), on_done=lambda _status, session: session.close(),   run=True,
+)</p>
+
+<pre><code>
+Vamos a ver en más detalle algunas partes. ```python urls = ( f&quot;https://intranet.upv.es/foto/getb/{i}.gif&quot; for i in range(int(sys.argv[1]))
 )
 </code></pre>
+
+<p>Primero, tenemos que definir las URLs a las que queremos llamar, la idea es que al script se le pase por argumentos el número de IDs hasta el que queremos iterar, para que el script tenga principio y fin, aunque si queremos iterar todas las URLs ese id va a tener que ser <strong>bastante</strong> alto. Por lo que definimos un generador, el cual empezará en el cero y acabará en <code>numero_por_argumentos - 1</code>.</p>
+
+<pre><code class="language-python">headers = {&quot;Referer&quot;: &quot;https://intranet.upv.es/pls/soalu/sic_al.lis&quot;}
+</code></pre>
+
+<p>Aquí estamos definiendo la cabecera <em>mágica</em> que nos va a permitir acceder al recurso. ```python hash_not_available = &ldquo;12fc76fc961784a7568e6&hellip;&rdquo;</p>
+
+<pre><code>
+Bien, si queremos iterar sobre todos los identificadores que existen, nos vamos a encontrar muchas veces con la imagen de recurso no disponible, por lo que tenemos que encontrar alguna forma de filtrarla. Una forma rápida de hacerlo es comparando los hashes de los archivos, la función en concreto que vamos a usar es [BLAKE2b](https://blake2.net/). Calculamos el hash para dicha foto y lo dejamos guardado en una variable para su posterior uso.
+
+La parte más interesante de la función de descarga es cuando comparamos que la imagen sea distinta a la de no disponible cuanto a la función de descarga es bastante simple, lo único interesante es cuando comparamos que la foto sea distinta a la de no disponible:
+
+```python
+if hashlib.blake2b(response_file).hexdigest() != hash_not_available:
+ ...
+</code></pre>
+
+<p>Además de coger el identificador de la url que estemos buscando en ese momento: <code>python
+file_name = url.split(&quot;/&quot;)[5]</code> Por último, usamos pypeln para organizar el cómo se van a hacer las llamadas:</p>
+
+<pre><code class="language-python">aio.each(
+  download,
+ urls,
+  workers=1_000,
+ ...
+)
+</code></pre>
+
+<p>Es interesante el parámetro <code>workers</code>, para especificar que de forma concurrente solamente queremos estar scrapeando 1000 direcciones (que no son pocas). Cuando una de las tareas abiertas se completen se irán lanzando nuevas hasta llegar a este límite.
+Aquí podeis ver cómo scrapea 2.000 IDs:</p>
+
+<p><a href="https://asciinema.org/a/izDRrLLGqx3yIRMZU25x55BK3"><img src="https://asciinema.org/a/izDRrLLGqx3yIRMZU25x55BK3.svg" alt="asciicast" /></a></p>
 
     </section>
 
