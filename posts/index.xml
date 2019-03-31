@@ -6,21 +6,10 @@
     <description>Recent content in Posts on Iván Martín</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Thu, 28 Mar 2019 10:24:47 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 09 Dec 2018 12:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://ivmg.me/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>UPV, Python y muchas fotos</title>
-      <link>https://ivmg.me/posts/upv-facemash/</link>
-      <pubDate>Thu, 28 Mar 2019 10:24:47 +0100</pubDate>
-      
-      <guid>https://ivmg.me/posts/upv-facemash/</guid>
-      <description>Hace más o menos tres años, durante una clase de Introducción a la Programación, mandaron por el grupo de clase un enlace a una página hosteada en github. El contenido era un juego al estilo Facemash, podéis acceder a lo que era el juego aquí.
-Toda la clase se puso a jugar.
-Al cabo de unos días la gente encargada de los sistemas hicieron cambios para que las fotos dejasen de ser accesibles sin autenticación.</description>
-    </item>
     
     <item>
       <title>¡Hola!</title>
