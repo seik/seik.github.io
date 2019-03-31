@@ -304,7 +304,7 @@ aio.each(
 <p>La parte más interesante de la función de descarga es cuando comparamos que la imagen sea distinta a la de no disponible cuanto a la función de descarga es bastante simple, lo único interesante es cuando comparamos que la foto sea distinta a la de no disponible:</p>
 
 <pre><code class="language-python">if hashlib.blake2b(response_file).hexdigest() != hash_not_available:
- ...
+    ...
 </code></pre>
 
 <p>Además de coger el identificador de la url que estemos buscando en ese momento:</p>
