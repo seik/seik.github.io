@@ -97,7 +97,7 @@
     },
     "headline": Upv Facemash,
     "name": Upv Facemash,
-    "wordCount": 1074,
+    "wordCount": 1075,
     "timeRequired": "PT6M",
     "inLanguage": {
       "@type": "Language",
@@ -224,7 +224,7 @@
 <pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla' -H 'Cookie: TDp={token};' --output foto.gif
 </code></pre>
 
-<p>Llegados a este punto, tenemos dos headers: <code>TDp</code> (el token?) y <code>Referrer</code>. Si sólo dejamos el parámetro <code>Referrer</code>, la fotografía se descarga, en cambio, quitándolo se nos devuelve la imagen de recurso no disponible. Por lo que la petición mínima con la que nos quedamos es:</p>
+<p>Llegados a este punto, tenemos dos headers: <code>Cookie: TDp</code> (el token?) y <code>Referrer</code>. Si sólo dejamos el parámetro <code>Referrer</code>, la fotografía se descarga, en cambio, quitándolo se nos devuelve la imagen de recurso no disponible. Por lo que la petición mínima con la que nos quedamos es:</p>
 
 <pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis' --output foto.gif
 </code></pre>
