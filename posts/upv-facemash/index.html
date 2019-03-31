@@ -97,7 +97,7 @@
     },
     "headline": UPV, Python y muchas fotos,
     "name": UPV, Python y muchas fotos,
-    "wordCount": 1032,
+    "wordCount": 1064,
     "timeRequired": "PT5M",
     "inLanguage": {
       "@type": "Language",
@@ -216,11 +216,12 @@
 
 <p>Vamos a ver cómo se está haciendo la llamada exactamente. Desde el inspector, podemos copiar la petición exacta que ha hecho el navegador para obtener una imagen. Que en este caso, en formato cURL sería tal que:</p>
 
-<pre><code class="language-bash">-H 'Cookie: T=foto1; AMFParams=dummy,false,false,false,false,true,mac,10_14_2,chrome,73.0.3683.75; AMFDetect=true; TDp={token}; iacclarge=; UPV_DEBUG=,iacclarge; accesible=HighContrast' -H 'Connection: keep-alive'
--H 'Cache-Control: no-cache' --compressed ``` Si quitamos las cosas que no nos interesan y le añadimos `--output foto.gif` para que nos descargue el archivo, nos quedariamos con:
+<pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Pragma: no-cache' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: es-ES,es;q=0.9,en;q=0.8' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36' -H 'Accept: image/webp,image/apng,image/*,*/*;q=0.8' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla' -H 'Cookie: T=foto1; AMFParams=dummy,false,false,false,false,true,mac,10_14_2,chrome,73.0.3683.75; AMFDetect=true; TDp={token}; iacclarge=; UPV_DEBUG=,iacclarge; accesible=HighContrast' -H 'Connection: keep-alive' -H 'Cache-Control: no-cache' --compressed
+</code></pre>
 
-```bash
-curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla' -H 'Cookie: TDp={token};' --output foto.gif
+<p>Si quitamos las cosas que no nos interesan y le añadimos <code>--output foto.gif</code> para que nos descargue el archivo, nos quedariamos con:</p>
+
+<pre><code class="language-bash">curl 'https://intranet.upv.es/foto/getb/55244399.gif' -H 'Referer: https://intranet.upv.es/pls/soalu/sic_al.lis?p_vista=intranet&amp;p_idioma=c&amp;p_caca=2018&amp;P_asi=11566&amp;P_ACTION=generarorla' -H 'Cookie: TDp={token};' --output foto.gif
 </code></pre>
 
 <p>Llegados a este punto, tenemos dos headers: <code>TDp</code> (el token?) y <code>Referrer</code>. Si sólo dejamos el parámetro <code>Referrer</code>, la fotografía se descarga, en cambio, quitándolo se nos devuelve la imagen de recurso no disponible. Por lo que la petición mínima con la que nos quedamos es:</p>
