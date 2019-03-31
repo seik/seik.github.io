@@ -97,7 +97,7 @@
     },
     "headline": Upv Facemash,
     "name": Upv Facemash,
-    "wordCount": 1075,
+    "wordCount": 1072,
     "timeRequired": "PT6M",
     "inLanguage": {
       "@type": "Language",
@@ -261,19 +261,16 @@ hash_not_available = (
 
 
 async def download(url, session):
-    try:
-        async with session.get(url, headers=headers) as response:
-            response_file = await response.read()
+    async with session.get(url, headers=headers) as response:
+        response_file = await response.read()
 
-            if hashlib.blake2b(response_file).hexdigest() != hash_not_available:
-                file_name = url.split(&quot;/&quot;)[5]
+        if hashlib.blake2b(response_file).hexdigest() != hash_not_available:
+            file_name = url.split(&quot;/&quot;)[5]
 
-                f = await aiofiles.open(f&quot;photos/{file_name}&quot;, mode=&quot;wb&quot;)
+            f = await aiofiles.open(f&quot;photos/{file_name}&quot;, mode=&quot;wb&quot;)
 
-                await f.write(await response.read())
-                await f.close()
-    except:
-        pass
+            await f.write(await response.read())
+            await f.close()
 
 
 aio.each(
