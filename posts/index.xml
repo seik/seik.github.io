@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Iván Martín</title>
+    <title>Posts on seikv</title>
     <link>https://ivmg.me/posts/</link>
-    <description>Recent content in Posts on Iván Martín</description>
+    <description>Recent content in Posts on seikv</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>es-ES</language>
+    <language>es</language>
     <lastBuildDate>Sun, 31 Mar 2019 19:27:53 +0200</lastBuildDate>
     
 	<atom:link href="https://ivmg.me/posts/index.xml" rel="self" type="application/rss+xml" />
